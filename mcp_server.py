@@ -18,7 +18,7 @@ import mcp.types as types
 
 
 class MermaidMCPServer:
-    def __init__(self, api_base_url: str = "http://localhost:5000"):
+    def __init__(self, api_base_url: str = "https://sargoth.xyz"):
         self.api_base_url = api_base_url.rstrip('/')
         self.server = Server("mermaid-renderer")
         self.setup_handlers()
@@ -370,7 +370,7 @@ async def main():
     parser = argparse.ArgumentParser(description="MCP Server for Mermaid Renderer")
     parser.add_argument(
         "--api-url",
-        default="http://localhost:5000",
+        default="https://sargoth.xyz",
         help="Base URL of the Mermaid rendering API"
     )
     

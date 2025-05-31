@@ -68,8 +68,8 @@ Analyze Mermaid code and suggest improvements or fixes.
 ### Prerequisites
 
 1. **Python 3.8+** installed
-2. **Sargoth Mermaid Renderer API** running (see [main project](https://github.com/floor-licker/mermaid-render))
-3. **MCP-compatible AI assistant** (Claude Desktop, etc.)
+2. **MCP-compatible AI assistant** (Claude Desktop, etc.)
+3. **Optional**: Local Sargoth Mermaid Renderer API for development (see [main project](https://github.com/floor-licker/mermaid-render))
 
 ### Step 1: Install MCP Dependencies
 
@@ -86,11 +86,18 @@ chmod +x mcp_server.py
 
 ### Step 3: Test the Server
 
+**Using Production API (Recommended):**
 ```bash
-# Start your Mermaid API first
+# Test with the live production API
+python mcp_server.py
+```
+
+**Using Local Development API:**
+```bash
+# Start your local Mermaid API first
 python ../app.py
 
-# In another terminal, test the MCP server
+# In another terminal, test the MCP server with local API
 python mcp_server.py --api-url http://localhost:5000
 ```
 
@@ -104,15 +111,25 @@ python mcp_server.py --api-url http://localhost:5000
 
 2. **Add the MCP server configuration:**
 
+**For Production Use (Recommended):**
 ```json
 {
   "mcpServers": {
     "mermaid-renderer": {
       "command": "python",
-      "args": ["/absolute/path/to/mcp_server.py"],
-      "env": {
-        "MERMAID_API_URL": "http://localhost:5000"
-      }
+      "args": ["/absolute/path/to/mcp_server.py"]
+    }
+  }
+}
+```
+
+**For Local Development:**
+```json
+{
+  "mcpServers": {
+    "mermaid-renderer": {
+      "command": "python",
+      "args": ["/absolute/path/to/mcp_server.py", "--api-url", "http://localhost:5000"]
     }
   }
 }
@@ -127,15 +144,19 @@ python mcp_server.py --api-url http://localhost:5000
 
 ### Other MCP Clients
 
-The server works with any MCP-compatible client. Configure it using:
-
+**Production Configuration:**
 ```json
 {
   "command": "python",
-  "args": ["mcp_server.py"],
-  "env": {
-    "MERMAID_API_URL": "http://localhost:5000"
-  }
+  "args": ["mcp_server.py"]
+}
+```
+
+**Local Development Configuration:**
+```json
+{
+  "command": "python",
+  "args": ["mcp_server.py", "--api-url", "http://localhost:5000"]
 }
 ```
 
@@ -174,25 +195,52 @@ stateDiagram-v2
 
 ## ⚙️ API Configuration
 
+### Default Behavior
+
+The MCP server uses the **production API at https://sargoth.xyz** by default. No additional configuration is needed for most users.
+
 ### Environment Variables
 
-- `MERMAID_API_URL`: Base URL of your Mermaid renderer API (default: `http://localhost:5000`)
+- `MERMAID_API_URL`: Override the API base URL (optional)
 
 ### Command Line Options
 
 ```bash
 python mcp_server.py --help
 
-# Custom API URL
-python mcp_server.py --api-url http://your-server:8080
+# Use production API (default)
+python mcp_server.py
+
+# Use local development API
+python mcp_server.py --api-url http://localhost:5000
+
+# Use custom API endpoint
+python mcp_server.py --api-url https://your-custom-domain.com
 ```
+
+### Configuration Examples
+
+**Production (Default):**
+- No configuration needed
+- Uses https://sargoth.xyz automatically
+- Recommended for most users
+
+**Local Development:**
+- Run local API: `python ../app.py`
+- Use flag: `--api-url http://localhost:5000`
+- Useful for testing changes
+
+**Custom Deployment:**
+- Use your own hosted instance
+- Specify with: `--api-url https://your-domain.com`
 
 ## 🔧 Troubleshooting
 
 ### Server Won't Start
-1. Ensure the Mermaid API is running on the specified URL
-2. Check that all dependencies are installed: `pip install -r requirements.txt`
+1. Check internet connection (production API requires online access)
+2. Ensure all dependencies are installed: `pip install -r requirements.txt`
 3. Verify Python version: `python --version` (needs 3.8+)
+4. For local development, ensure the local Mermaid API is running
 
 ### AI Assistant Can't Find Tools
 1. Check the MCP configuration file path
@@ -201,16 +249,20 @@ python mcp_server.py --api-url http://your-server:8080
 4. Check logs for connection errors
 
 ### Rendering Fails
-1. Verify the Mermaid API is accessible: `curl http://localhost:5000/health`
-2. Test with simple Mermaid code first
-3. Check API logs for detailed error messages
+1. **Production API**: Check internet connection and try again
+2. **Local API**: Verify the API is accessible: `curl http://localhost:5000/health`
+3. Test with simple Mermaid code first
+4. Check API logs for detailed error messages
+
+### Connection Issues
+1. **Firewall**: Ensure outbound HTTPS connections are allowed
+2. **Proxy**: Configure proxy settings if behind corporate firewall
+3. **Local Development**: Verify local API is running on correct port
 
 ## 🔒 Security Considerations
 
-- The MCP server only connects to your local Mermaid API
-- No external network requests are made
-- Diagram data stays on your local machine
-- Consider firewall rules if exposing the API externally
+- **Production API**: Connects to https://sargoth.xyz over secure HTTPS
+- **Network**: Requires outbound HTTPS access to sargoth.xyz for production use
 
 ## 🎨 Advanced Usage
 
