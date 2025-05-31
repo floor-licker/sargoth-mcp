@@ -43,7 +43,7 @@ class MermaidMCPServer:
                             "theme": {
                                 "type": "string",
                                 "description": "Theme for the diagram",
-                                "enum": ["modern", "classic", "dark", "minimal"],
+                                "enum": ["modern", "corporate", "ocean", "forest", "lavender", "arctic", "sunset", "paper", "monochrome", "classic", "minimal", "dark"],
                                 "default": "modern"
                             }
                         },
@@ -63,7 +63,7 @@ class MermaidMCPServer:
                             "theme": {
                                 "type": "string",
                                 "description": "Theme for the diagram",
-                                "enum": ["modern", "classic", "dark", "minimal"],
+                                "enum": ["modern", "corporate", "ocean", "forest", "lavender", "arctic", "sunset", "paper", "monochrome", "classic", "minimal", "dark"],
                                 "default": "modern"
                             },
                             "scale": {
