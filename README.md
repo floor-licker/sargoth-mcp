@@ -8,6 +8,8 @@
   [![MCP Compatible](https://img.shields.io/badge/MCP-Compatible-blue.svg)](https://modelcontextprotocol.io/)
   [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
   [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+  
+  ### 🌟 Powered by [Sargoth.xyz](https://sargoth.xyz) - The First & Only Free, No-Account Required Instant Mermaid Renderer on the Web
 </div>
 
 ---
