@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "mermaid-renderer": {
+      "command": "python",
+      "args": ["mcp_server.py"],
+      "env": {
+        "MERMAID_API_URL": "http://localhost:5000"
+      }
+    }
+  }
+} 
