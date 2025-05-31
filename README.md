@@ -217,7 +217,7 @@ python mcp_server.py
 python mcp_server.py --api-url http://localhost:5000
 
 # Use custom API endpoint
-python mcp_server.py --api-url https://your-custom-domain.com
+python mcp_server.py --api-url https://sargoth.xyz
 ```
 
 ### Configuration Examples
@@ -234,7 +234,7 @@ python mcp_server.py --api-url https://your-custom-domain.com
 
 **Custom Deployment:**
 - Use your own hosted instance
-- Specify with: `--api-url https://your-domain.com`
+- Specify with: `--api-url https://sargoth.xyz`
 
 ## 🔧 Troubleshooting
 
